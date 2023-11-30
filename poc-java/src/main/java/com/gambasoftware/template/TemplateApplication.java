@@ -13,6 +13,7 @@ public class TemplateApplication {
 		GraphTraversalSource g = graph.traversal();
 
 		// Adding person vertices
+		//next(), is a terminal step, which essentially ends the graph traversal and returns a concrete object
 		Vertex v1 = g.addV("person").property("name", "Marlon").property("age", 33).next();
 		// Adding pet vertices
 		Vertex v2 = g.addV("cat").property("name", "Kira").property("age", 1).next();
@@ -39,6 +40,10 @@ public class TemplateApplication {
 		// Perform a simple traversal
 		System.out.println("\nMarlon has these pets:");
 		g.V(v1).out("has").values("name").forEachRemaining(System.out::println);
+
+		//Count Pets the properties
+		System.out.println(g.V().has("name","Marlon")
+				.outE("has").count().next());
 
 	}
 
